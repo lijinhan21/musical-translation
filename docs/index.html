@@ -187,8 +187,35 @@ Extensive experiments, including both automatic and human evaluations, demonstra
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3">Method</h2>
-        
+      <div class="column">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p> 
+            To translate a paragraph of English musical lyrics into Chinese lyrics that both retain the original narrative role and are comfortable for singing, we focus on two kinds of constraints: <b>translation quality</b> and <b>singability</b>. 
+          </p>
+          <p>
+            For translation quality, we seek to ensure that the translated lyrics are fluent, faithful to the original lyrics, and have literal beauty. 
+            For singability, we aim to ensure that the translated lyrics can be sung out naturally, which includes constraints on the length of the lyrics and the rhyme pattern. The following figure shows the constraints we consider in our work, with examples demonstrating their importance.
+          </p>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <img src="./static/images/constraints.png"/>
+          </div>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            Our method consists of three key components: <b>reward models</b> trained to evaluate the quality of the translated language, a <b>translation model</b> trained using a two-stage pipeline which can generate sentence-level translations that are of high quality and satisfy singability constraints, and an <b>inference-time optimization framework</b> that composes sentence-level results into paragraph-level output. 
+            The following figure illustrates how these components work together.
+          </p>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <img src="./static/images/pipeline.png"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -198,8 +225,231 @@ Extensive experiments, including both automatic and human evaluations, demonstra
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
-      <h2 class="title is-3">Results</h2>
-        
+      <div class="column">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            We conduct extensive experiments including both automatic and human evaluations, where the results showcase the effectiveness of our method and demonstrate significant improvements over the baseline method.
+            Here we provide more demos along with their audios.
+          </p>
+        </div>
+
+        <h3 class="subtitle is-3 has-text-left">Demos</h3>
+
+        <table class="table is-bordered is-striped" style="margin: auto;">
+          <thead>
+            <tr>
+              <th>Song</th>
+              <th>English Lyrics</th>
+              <th>Translated Chinese Lyrics</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <p> The Impossible Dream</p>
+                <p> -- Man of La Mancha </p>
+              </td>
+              <td>
+                <p>To dream the impossible dream,</p>
+                <p>To fight the unbeatable foe,</p>
+                <p>To bear with unbearable sorrow,</p>
+                <p>To run where the brave dare not go</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\dream_ori.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <p>追求不可能的梦想</p>
+                <p>挑战不可战胜之敌</p>
+                <p>承受那难以承受之痛</p>
+                <p>勇闯无人敢去之地</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\dream_ours.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p> Your Will Be Found </p>
+                <p> -- Dear Evan Hansen </p>
+              </td>
+              <td>
+                <p>So let the sun come streaming in</p>
+                <p>Cause you'll reach up and you'll rise again</p>
+                <p>Lift your head and look around</p>
+                <p>You will be found</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\found_ori.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <p>就让阳光洒满房间</p>
+                <p>因为你会奋起再登攀</p>
+                <p>抬起头四处看看</p>
+                <p>必被发现</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\found_ours.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p> Man of La Mancha </p>
+                <p> -- Man of La Mancha </p>
+              </td>
+              <td>
+                <p>I am I, Don Quixote, the Lord of La Mancha</p>
+                <p>My destiny calls and I go</p>
+                <p>And the wild winds of fortune, will carry me onward</p>
+                <p>Oh whithersoever they blow</p>
+                <p>Whithersoever they blow, onward to glory I go</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\man_ori.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <p>我是我，堂吉诃德，拉曼查的领主</p>
+                <p>宿命呼唤，我随之去</p> 
+                <p>命运的狂风，将我带向未知旅途</p>
+                <p>任凭风儿吹向何处</p>
+                <p>任凭风向何处吹，我直奔荣耀而去</p>
+                <audio controls>
+                  <source src=".\static\audio\Cool demos\man_ours.MP3" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <br>
+        <h3 class="subtitle is-3 has-text-left">Comparison with Baseline</h3>
+        <div class="table-container">
+          <table class="table is-bordered is-striped" style="margin: auto;">
+            <thead>
+              <tr>
+                <th>Song</th>
+                <th>English Lyrics</th>
+                <th>Ours</th>
+                <th>Baseline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p> Sixteen Going on Seventeen</p>
+                  <p> -- Sound of the Music</p>
+                </td>
+                <td>
+                  <p>You are sixteen going on seventeen</p>
+                  <p>Baby, it's time to think</p>
+                  <p>Better beware, be canny and careful</p>
+                  <p>Baby, you're on the brink</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Sixteen Going on Seventeen\16_ori.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>你十六岁快要十七</p>
+                  <p>兄弟们排成排</p>
+                  <p>年少轻狂的无赖痞子</p>
+                  <p>会为你提供美食</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Sixteen Going on Seventeen\16_ours.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>你是十六个十七岁</p>
+                  <p>伙伴们会结队</p>
+                  <p>渴望年少顽童和部队</p>
+                  <p>献给你餐酒一杯</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Sixteen Going on Seventeen\16_baseline.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p> The Phantom of the Opera</p>  
+                  <p> -- The Phantom of the Opera</p>
+                </td>
+                <td>
+                  <p>Sing once again with me</p>
+                  <p>Our strange duet</p>
+                  <p>My power over you</p>
+                  <p>Grows stronger yet</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Phantom of the opera\phantom_ori.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>和我再一起唱</p>
+                  <p>怪异对唱</p>
+                  <p>我对你的控制</p>
+                  <p>越来越强</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Phantom of the opera\phantom_ours.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>再和我一起唱</p>
+                  <p>陌生的重唱</p>
+                  <p>我对你的力量</p>
+                  <p>更加茁壮</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Phantom of the opera\phantom_baseline.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p> Me and the Sky </p> 
+                  <p> --Come From Away</p>  
+                </td>
+                <td>
+                  <p>Suddenly I'm flying company charters</p>
+                  <p>Suddenly everything's high</p>
+                  <p>Suddenly there's nothing in between me and the sky!</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Me and the Sky\MeAndtheSky_ori.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>突然间我正坐着包机飞往</p>
+                  <p>突然一切都高涨</p>
+                  <p>突然之间我和天空之间无屏障</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Me and the Sky\sky_ours.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+                <td>
+                  <p>突然我起飞公司的航程表</p>
+                  <p>都突然变得很高</p>
+                  <p>突然间我和天空之间一片飘渺</p>
+                  <audio controls>
+                    <source src=".\static\audio\Compare with Baseline\Me and the Sky\sky_baseline.MP3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                  </audio>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </section>
